@@ -1,0 +1,7 @@
+docker build --force-rm --tag tf2_case_qianlai:1.0.0-r1 .
+
+docker run --runtime=nvidia \
+-e NVIDIA_VISIBLE_DEVICES=1 \
+--name tf2_case_qianlai  \
+-it tf2_case_qianlai:1.0.0-r1
+

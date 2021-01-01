@@ -1,3 +1,9 @@
+/src/chinese_wwm_ext_pytorch
+/.idea
+
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
