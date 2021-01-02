@@ -2,7 +2,7 @@
 
 
 import os
-from modeling import BertDense
+from modeling_bi_gru import BertBiGruHeadModel
 import sample_processor
 import train_func
 import utils
@@ -10,9 +10,9 @@ from logger_module import log_obj
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 bert_model_path = "./chinese_wwm_ext_pytorch"
-do_cut_samples = False  # 测试时会只截取一个批次进行
+do_cut_samples = True  # 测试时会只截取一个批次进行
 from_pt = True
-EPOCHS = 10
+EPOCHS = 1
 to_model_path=""  # 模型保存位置  空串不会保存模型
 
 oce_index2label, oce_label2index = train_func.read_label_map("oce", "./data/")
@@ -45,10 +45,10 @@ ocn_dev = utils.load_json_file("data/ocn_dev.json")
 tn_train = utils.load_json_file("data/tn_train.json")
 tn_dev = utils.load_json_file("data/tn_dev.json")
 
-bert_dense_model = BertDense(bert_model_path, from_pt=from_pt,
-                             oce_cls_num=len(oce_label2index),
-                             ocn_cls_num=len(ocn_label2index),
-                             tn_cls_num=len(tn_label2index))
+bert_dense_model = BertBiGruHeadModel(bert_model_path, from_pt=from_pt,
+                                      oce_cls_num=len(oce_label2index),
+                                      ocn_cls_num=len(ocn_label2index),
+                                      tn_cls_num=len(tn_label2index))
 log_obj.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>oce<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 train_ds, test_ds, trn, ten = train_func.make_dataset(oce_train, oce_dev,
                                                       label2index=oce_label2index,
