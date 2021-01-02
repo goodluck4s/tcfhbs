@@ -10,10 +10,10 @@ from logger_module import log_obj
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 bert_model_path = "./chinese_wwm_ext_pytorch"
-do_cut_samples = False  # 测试时会只截取一个批次进行
+do_cut_samples = True  # 测试时会只截取一个批次进行
 from_pt = True
-EPOCHS = 10
-to_model_path=""  # 模型保存位置  空串不会保存模型
+EPOCHS = 1
+to_model_path="to_model"  # 模型保存位置  空串不会保存模型
 
 oce_index2label, oce_label2index = train_func.read_label_map("oce", "./data/")
 ocn_index2label, ocn_label2index = train_func.read_label_map("ocn", "./data/")
@@ -74,3 +74,11 @@ train_ds, test_ds, trn, ten = train_func.make_dataset(tn_train, tn_dev,
                                                       cut_off=do_cut_samples)
 train_func.train_a_dataset(bert_dense_model, train_ds, test_ds,
                            task_name="tn", EPOCHS=EPOCHS, to_model_path=to_model_path)
+
+if to_model_path:
+    saved_path = os.path.join(to_model_path, str("0"), "ckpt")
+    os.makedirs(saved_path, exist_ok=True)
+    bert_dense_model.save_weights(os.path.join(saved_path,"model.ckpt"))
+    log_obj.info("模型保存成功")
+
+log_obj.info(">>>>>>>>>>>word done<<<<<<<<<<<")
