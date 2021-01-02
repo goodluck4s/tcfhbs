@@ -9,7 +9,6 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 bert_model_path = "./chinese_wwm_ext_pytorch"
 ckpt_path = "./to_model/0/ckpt/model.ckpt"
 from_pt = True
-to_model_path = "to_model"  # 模型保存位置  空串不会保存模型
 
 oce_index2label, oce_label2index = utils.read_label_map("oce", "./data/")
 ocn_index2label, ocn_label2index = utils.read_label_map("ocn", "./data/")
@@ -19,9 +18,9 @@ oce_test = utils.load_json_file("data/oce_test.json")
 ocn_test = utils.load_json_file("data/ocn_test.json")
 tn_test = utils.load_json_file("data/tn_test.json")
 
-oce_test = oce_test[:3]
-ocn_test = ocn_test[:3]
-tn_test = tn_test[:3]
+# oce_test = oce_test[:3]
+# ocn_test = ocn_test[:3]
+# tn_test = tn_test[:3]
 
 model = Predict(ckpt_path, bert_model_path, from_pt=from_pt,
                 oce_cls_num=len(oce_label2index),
