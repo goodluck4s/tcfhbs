@@ -3,7 +3,7 @@
 /train_record
 /src/to_model
 /src/tmp
-
+/src/predict_res
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
