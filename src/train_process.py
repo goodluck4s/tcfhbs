@@ -15,9 +15,9 @@ from_pt = True
 EPOCHS = 1
 to_model_path="to_model"  # 模型保存位置  空串不会保存模型
 
-oce_index2label, oce_label2index = train_func.read_label_map("oce", "./data/")
-ocn_index2label, ocn_label2index = train_func.read_label_map("ocn", "./data/")
-tn_index2label, tn_label2index = train_func.read_label_map("tn", "./data/")
+oce_index2label, oce_label2index = utils.read_label_map("oce", "./data/")
+ocn_index2label, ocn_label2index = utils.read_label_map("ocn", "./data/")
+tn_index2label, tn_label2index = utils.read_label_map("tn", "./data/")
 
 # sample_processor.process(
 #     "data/oce_samples.json",

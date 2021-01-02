@@ -2,7 +2,7 @@
 /.idea
 /train_record
 /src/to_model
-
+/src/tmp
 
 
 # Byte-compiled / optimized / DLL files
