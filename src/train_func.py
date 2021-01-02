@@ -116,14 +116,14 @@ def train_a_dataset(model,train_ds, test_ds,task_name,EPOCHS=10,to_model_path=""
 
         for _, batch_inputs in enumerate(train_ds):
             train_step(batch_inputs)
-            if _ % 200 == 0:  # 50批打印一次
+            if _ % 800 == 0:  # 50批打印一次
                 log_obj.info(
                     'train Batch={} loss={:.4f} acc={:.4f}'.format(
                         _, train_loss.result(), train_acc.result()))
 
         for _, batch_dev_inputs in enumerate(test_ds):
             dev_step(batch_dev_inputs)
-            if _ % 200 == 0:  # 50批打印一次
+            if _ % 300 == 0:  # 50批打印一次
                 log_obj.info('dev Batch={} loss={:.4f} acc={:.4f} precision={:.4f} recall={:.4f} f1={:.4f}'.format(
                     _, dev_loss.result(), dev_acc.result(), dev_precision.result(), dev_recall.result(),
                     dev_f1.result()))

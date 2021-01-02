@@ -10,9 +10,9 @@ from logger_module import log_obj
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 bert_model_path = "./chinese_wwm_ext_pytorch"
-do_cut_samples = True  # 测试时会只截取一个批次进行
+do_cut_samples = False  # 测试时会只截取一个批次进行
 from_pt = True
-EPOCHS = 1
+EPOCHS = 10
 to_model_path=""  # 模型保存位置  空串不会保存模型
 
 oce_index2label, oce_label2index = train_func.read_label_map("oce", "./data/")
