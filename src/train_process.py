@@ -2,7 +2,7 @@
 
 
 import os
-from modeling_bi_gru import BertBiGruHeadModel
+from modeling_trm import BertTrmHeadModel
 import sample_processor
 import train_func
 import utils
@@ -45,7 +45,7 @@ ocn_dev = utils.load_json_file("data/ocn_dev.json")
 tn_train = utils.load_json_file("data/tn_train.json")
 tn_dev = utils.load_json_file("data/tn_dev.json")
 
-bert_dense_model = BertBiGruHeadModel(bert_model_path, from_pt=from_pt,
+bert_dense_model = BertTrmHeadModel(bert_model_path, from_pt=from_pt,
                                       oce_cls_num=len(oce_label2index),
                                       ocn_cls_num=len(ocn_label2index),
                                       tn_cls_num=len(tn_label2index))
