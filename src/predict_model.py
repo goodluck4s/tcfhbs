@@ -28,12 +28,10 @@ class Predict():
                                          label=x.get("label", None)))
         return examples
 
-    def make_dataset(self, samples, cut_off=False):
+    def make_dataset(self, samples):
         if not samples:
             return None
         examples = self._make_examples(samples)
-        if cut_off:
-            examples = examples[:properties.BATCH_SIZE]
         # 这里会处理label的转换
         ds = tokenize_utils.convert_examples_to_features(examples, self.tokenizer, label_map={})
         ds = ds.batch(properties.BATCH_SIZE)  # .repeat(-1)会一直Repeat下去
@@ -44,7 +42,9 @@ class Predict():
         if ds is None:
             return []
         y_predict = []
-        for inputs in ds:
+        for _, inputs in enumerate(ds):
+            if _ % 100 == 0:
+                log_obj.info("第%s批", (_))
             outputs = self.model(inputs[0], task_name, training=False)
             res = tf.math.argmax(outputs, axis=-1)
             y_predict.extend(res.numpy().tolist())
