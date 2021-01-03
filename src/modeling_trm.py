@@ -9,10 +9,10 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 
 
 class BertTrmHeadModel(tf.keras.Model):
-    def __init__(self, bert_model_path, from_pt=False, oce_cls_num=7, ocn_cls_num=3, tn_cls_num=15):
+    def __init__(self, bert_model_path, oce_cls_num=7, ocn_cls_num=3, tn_cls_num=15):
         super(BertTrmHeadModel, self).__init__()
 
-        self.bert_encoder_obj = BERTEncoder(bert_model_path, from_pt=from_pt,do_update_weights=False)
+        self.bert_encoder_obj = BERTEncoder(bert_model_path, do_update_weights=False)
         self.tf_bert_model = self.bert_encoder_obj.get_model()
         self.tokenizer = self.bert_encoder_obj.get_tokenizer()
         self.bert_config = self.bert_encoder_obj.get_config()
@@ -80,8 +80,8 @@ def compute_logit(head_dic,sequence_output,attention_mask,training):
 
 
 if __name__=="__main__":
-    pt_base_model_path = "/Users/qianlai/Documents/_model/chinese_wwm_ext_pytorch"
-    test_model = BertTrmHeadModel(pt_base_model_path,from_pt=True)
+    pt_base_model_path = "pre_trained_bert"
+    test_model = BertTrmHeadModel(pt_base_model_path)
     inputs = test_model.tokenizer.encode_plus("Hello, my dog is cute", return_tensors="tf")
 
     res = test_model(inputs,task="tn",training=False)

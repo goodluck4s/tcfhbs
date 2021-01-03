@@ -6,9 +6,8 @@ from predict_model import Predict
 import json
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
-bert_model_path = "./chinese_wwm_ext_pytorch"
+bert_model_path = "./pre_trained_bert"
 ckpt_path = "./to_model/0/ckpt/model.ckpt"
-from_pt = True
 
 oce_index2label, oce_label2index = utils.read_label_map("oce", "./data/")
 ocn_index2label, ocn_label2index = utils.read_label_map("ocn", "./data/")
@@ -22,7 +21,7 @@ tn_test = utils.load_json_file("data/tn_test.json")
 # ocn_test = ocn_test[:3]
 # tn_test = tn_test[:3]
 
-model = Predict(ckpt_path, bert_model_path, from_pt=from_pt,
+model = Predict(ckpt_path, bert_model_path,
                 oce_cls_num=len(oce_label2index),
                 ocn_cls_num=len(ocn_label2index),
                 tn_cls_num=len(tn_label2index)
@@ -38,7 +37,7 @@ def predict_test_dataset(samples, index2label, task_name):
         "tn": "tnews_predict.json",
     }
 
-    with open(os.path.join("./predict_res/", name_map[task_name]), "w") as f:
+    with open(os.path.join("./submit_sample/", name_map[task_name]), "w") as f:
         for sample, label in zip(samples, label_predicts):
             tmp = {"id": sample["id"], "label": label}
             tmp = json.dumps(tmp, ensure_ascii=False)

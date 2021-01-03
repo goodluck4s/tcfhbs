@@ -6,9 +6,8 @@ from predict_model import Predict
 from sklearn import metrics
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
-bert_model_path = "./chinese_wwm_ext_pytorch"
+bert_model_path = "./pre_trained_bert"
 ckpt_path = "./to_model/0/ckpt/model.ckpt"
-from_pt = True
 
 oce_index2label, oce_label2index = utils.read_label_map("oce", "./data/")
 ocn_index2label, ocn_label2index = utils.read_label_map("ocn", "./data/")
@@ -18,11 +17,11 @@ oce_dev = utils.load_json_file("data/oce_dev.json")
 ocn_dev = utils.load_json_file("data/ocn_dev.json")
 tn_dev = utils.load_json_file("data/tn_dev.json")
 
-# oce_dev = oce_dev[:100]
-# ocn_dev = ocn_dev[:100]
-# tn_dev = tn_dev[:100]
+oce_dev = oce_dev[:100]
+ocn_dev = ocn_dev[:100]
+tn_dev = tn_dev[:100]
 
-model = Predict(ckpt_path, bert_model_path, from_pt=from_pt,
+model = Predict(ckpt_path, bert_model_path,
                 oce_cls_num=len(oce_label2index),
                 ocn_cls_num=len(ocn_label2index),
                 tn_cls_num=len(tn_label2index)

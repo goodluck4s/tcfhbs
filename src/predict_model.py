@@ -11,9 +11,9 @@ import utils
 
 
 class Predict():
-    def __init__(self, ckpt_path, bert_model_path, from_pt=True, oce_cls_num=7, ocn_cls_num=3, tn_cls_num=15):
+    def __init__(self, ckpt_path, bert_model_path, oce_cls_num=7, ocn_cls_num=3, tn_cls_num=15):
 
-        self.model = BertTrmHeadModel(bert_model_path, from_pt=from_pt,
+        self.model = BertTrmHeadModel(bert_model_path,
                                       oce_cls_num=oce_cls_num, ocn_cls_num=ocn_cls_num, tn_cls_num=tn_cls_num)
         self.model.load_weights(ckpt_path)
         self.tokenizer = self.model.tokenizer

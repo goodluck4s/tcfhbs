@@ -4,6 +4,8 @@
 /src/to_model
 /src/tmp
 /src/predict_res
+/src/submit_sample
+/src/pre_trained_bert
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

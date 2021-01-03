@@ -9,9 +9,8 @@ import utils
 from logger_module import log_obj
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
-bert_model_path = "./chinese_wwm_ext_pytorch"
-do_cut_samples = False  # 测试时会只截取一个批次进行
-from_pt = True
+bert_model_path = "./pre_trained_bert"
+do_cut_samples = True  # 测试时会只截取一个批次进行
 to_model_path="to_model"  # 模型保存位置  空串不会保存模型
 
 oce_index2label, oce_label2index = utils.read_label_map("oce", "./data/")
@@ -44,7 +43,7 @@ ocn_dev = utils.load_json_file("data/ocn_dev.json")
 tn_train = utils.load_json_file("data/tn_train.json")
 tn_dev = utils.load_json_file("data/tn_dev.json")
 
-bert_dense_model = BertTrmHeadModel(bert_model_path, from_pt=from_pt,
+bert_dense_model = BertTrmHeadModel(bert_model_path,
                                       oce_cls_num=len(oce_label2index),
                                       ocn_cls_num=len(ocn_label2index),
                                       tn_cls_num=len(tn_label2index))
