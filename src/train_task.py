@@ -12,29 +12,31 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 bert_model_path = "./pre_trained_bert"
 do_cut_samples = True  # 测试时会只截取一个批次进行
 to_model_path="to_model"  # 模型保存位置  空串不会保存模型
+do_rebuild_samples = False
 
 oce_index2label, oce_label2index = utils.read_label_map("oce", "./data/")
 ocn_index2label, ocn_label2index = utils.read_label_map("ocn", "./data/")
 tn_index2label, tn_label2index = utils.read_label_map("tn", "./data/")
 
-sample_processor.process(
-    "data/oce_samples.json",
-    "data/oce_train.json",
-    "data/oce_dev.json",
-    extend_sample_map={'surprise': 2, 'fear': 2}
-)
-sample_processor.process(
-    "data/ocn_samples.json",
-    "data/ocn_train.json",
-    "data/ocn_dev.json",
-    extend_sample_map={}
-)
-sample_processor.process(
-    "data/tn_samples.json",
-    "data/tn_train.json",
-    "data/tn_dev.json",
-    extend_sample_map={'114': 3}
-)
+if do_rebuild_samples:
+    sample_processor.process(
+        "data/oce_samples.json",
+        "data/oce_train.json",
+        "data/oce_dev.json",
+        extend_sample_map={'surprise': 2, 'fear': 2}
+    )
+    sample_processor.process(
+        "data/ocn_samples.json",
+        "data/ocn_train.json",
+        "data/ocn_dev.json",
+        extend_sample_map={}
+    )
+    sample_processor.process(
+        "data/tn_samples.json",
+        "data/tn_train.json",
+        "data/tn_dev.json",
+        extend_sample_map={'114': 3}
+    )
 
 oce_train = utils.load_json_file("data/oce_train.json")
 oce_dev = utils.load_json_file("data/oce_dev.json")

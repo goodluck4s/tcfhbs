@@ -6,6 +6,7 @@
 /src/predict_res
 /src/submit_sample
 /src/pre_trained_bert
+/bert_ptfh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
