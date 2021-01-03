@@ -12,7 +12,6 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 bert_model_path = "./chinese_wwm_ext_pytorch"
 do_cut_samples = False  # 测试时会只截取一个批次进行
 from_pt = True
-EPOCHS = 1
 to_model_path="to_model"  # 模型保存位置  空串不会保存模型
 
 oce_index2label, oce_label2index = utils.read_label_map("oce", "./data/")
@@ -55,7 +54,7 @@ train_ds, test_ds, trn, ten = train_func.make_dataset(oce_train, oce_dev,
                                                       tokenizer=bert_dense_model.tokenizer,
                                                       cut_off=do_cut_samples)
 train_func.train_a_dataset(bert_dense_model, train_ds, test_ds,
-                           task_name="oce", EPOCHS=EPOCHS, to_model_path=to_model_path)
+                           task_name="oce", EPOCHS=2, to_model_path=to_model_path)
 
 log_obj.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>tn<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 train_ds, test_ds, trn, ten = train_func.make_dataset(tn_train, tn_dev,
@@ -63,7 +62,7 @@ train_ds, test_ds, trn, ten = train_func.make_dataset(tn_train, tn_dev,
                                                       tokenizer=bert_dense_model.tokenizer,
                                                       cut_off=do_cut_samples)
 train_func.train_a_dataset(bert_dense_model, train_ds, test_ds,
-                           task_name="tn", EPOCHS=EPOCHS, to_model_path=to_model_path)
+                           task_name="tn", EPOCHS=2, to_model_path=to_model_path)
 
 
 log_obj.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ocn<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
@@ -72,7 +71,7 @@ train_ds, test_ds, trn, ten = train_func.make_dataset(ocn_train, ocn_dev,
                                                       tokenizer=bert_dense_model.tokenizer,
                                                       cut_off=do_cut_samples)
 train_func.train_a_dataset(bert_dense_model, train_ds, test_ds,
-                           task_name="ocn", EPOCHS=EPOCHS, to_model_path=to_model_path)
+                           task_name="ocn", EPOCHS=2, to_model_path=to_model_path)
 
 
 

@@ -11,7 +11,7 @@ class BertBiGruHeadModel(tf.keras.Model):
     def __init__(self, bert_model_path, from_pt=False, oce_cls_num=7, ocn_cls_num=3, tn_cls_num=15):
         super(BertBiGruHeadModel, self).__init__()
 
-        self.bert_encoder_obj = BERTEncoder(bert_model_path, from_pt=from_pt,do_update_weights=True)
+        self.bert_encoder_obj = BERTEncoder(bert_model_path, from_pt=from_pt,do_update_weights=False)
         self.tf_bert_model = self.bert_encoder_obj.get_model()
         self.tokenizer = self.bert_encoder_obj.get_tokenizer()
         self.bert_config = self.bert_encoder_obj.get_config()
