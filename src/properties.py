@@ -16,8 +16,8 @@ is_debug = False
 #
 # base_model_path = "/Users/qianlai/Documents/_model/chinese_wwm_ext_pytorch"
 
-# test_dev_size=0.0001
-test_dev_size=0.2
+test_dev_size=0.001
+# test_dev_size=0.2
 # 参数
 MAX_LEN=128
 BATCH_SIZE = 16
